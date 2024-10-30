@@ -1,4 +1,3 @@
-// server.js o app.js (archivo principal de tu backend)
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -18,6 +17,11 @@ app.post('/api/products', (req, res) => {
   const newProduct = { id: products.length + 1, name, price, quantity };
   products.push(newProduct);
   res.status(201).json(newProduct);
+});
+
+// Endpoint para obtener todos los productos
+app.get('/api/products', (req, res) => {
+  res.json(products);
 });
 
 // Iniciar el servidor

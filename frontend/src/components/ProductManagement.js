@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-const ProductManagement = () => {
+const ProductManagement = ({ onProductAdded }) => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [error, setError] = useState(null);
 
   const handleAddProduct = async (e) => {
@@ -14,7 +14,7 @@ const ProductManagement = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, price, quantity }),
+        body: JSON.stringify({ name, price: Number(price), quantity: Number(quantity) }),
       });
       
       if (!response.ok) {
@@ -23,10 +23,16 @@ const ProductManagement = () => {
 
       const data = await response.json();
       console.log("Producto Agregado:", data);
+
       // Reinicia los campos del formulario
       setName("");
-      setPrice(0);
-      setQuantity(0);
+      setPrice("");
+      setQuantity("");
+      
+      // Actualiza la lista de productos
+      if (onProductAdded) {
+        onProductAdded();
+      }
     } catch (error) {
       setError(error.message);
       console.error("Error al agregar producto:", error);
@@ -45,19 +51,19 @@ const ProductManagement = () => {
       <input
         type="number"
         placeholder="Precio"
-        value={price}
+        value={price || ""}
         onChange={(e) => setPrice(e.target.value)}
         required
       />
       <input
         type="number"
         placeholder="Cantidad"
-        value={quantity}
+        value={quantity || ""}
         onChange={(e) => setQuantity(e.target.value)}
         required
       />
       <button type="submit">Agregar Producto</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Mensaje de error */}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 };
