@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import Register from "./components/Register"; // Importa el componente de registro
+import Register from "./components/Register";
+import TestAccess from "./components/TestAccess";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./AuthContext";
 import './App.css';
@@ -14,12 +15,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} /> {/* Nueva ruta para registro */}
+        <Route path="/register" element={<Register />} />
         <Route 
           path="/dashboard" 
-          element={
-            <ProtectedRoute component={Dashboard} />
-          } 
+          element={<ProtectedRoute component={Dashboard} />}
+        />
+        <Route 
+          path="/test-access" 
+          element={<TestAccess />}
         />
         <Route 
           path="*" 
