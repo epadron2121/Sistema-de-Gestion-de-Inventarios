@@ -2,59 +2,209 @@
 
 /* General styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
-    color: #333;
-  }
-  
-  /* Styling for the main container */
-  .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Button styling */
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Input field styling */
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  /* Heading styling */
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Styling for the main container */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Input field styling */
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+/* Heading styling */
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px; /* Limitar el tamaño del formulario */
+  margin: 0 auto; /* Centrar el formulario */
+}
+
+/* Auth form container */
+.auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* Styling for submit button */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Styling for alternate action button (like 'Login' or 'Register') */
+button[type="button"] {
+  background-color: transparent;
+  color: #4CAF50;
+  padding: 8px 16px;
+  border: 1px solid #4CAF50;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Additional spacing for buttons */
+button + button {
+  margin-top: 10px;
+}
+
+/* Focused state for inputs and selects */
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* Responsive Styles */
+
+/* Mobile view (up to 600px) */
+@media (max-width: 600px) {
   h2 {
-    text-align: center;
-    color: #333;
+    font-size: 24px; /* Reduce font size for smaller screens */
   }
-  
-  /* Form layout */
+
+  /* Form styling */
   form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    max-width: 90%; /* Make the form take more space on smaller screens */
   }
-  
+
+  /* Button size adjustments */
+  button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  /* Input size adjustments */
+  input[type="email"],
+  input[type="password"],
+  select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Adjust container width for mobile */
+  .container {
+    width: 100%;
+    margin: 10px;
+    padding: 15px;
+  }
+}
+
+/* Tablet view (600px to 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  h2 {
+    font-size: 26px; /* Slightly reduce font size for tablets */
+  }
+
+  /* Form styling */
+  form {
+    max-width: 80%; /* Make the form take more space on tablets */
+  }
+
+  /* Button size adjustments */
+  button {
+    padding: 10px 18px;
+    font-size: 15px;
+  }
+
+  /* Input size adjustments */
+  input[type="email"],
+  input[type="password"],
+  select {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  /* Adjust container width for tablets */
+  .container {
+    width: 90%;
+  }
+}
+
+/* Desktop view (1024px and up) */
+@media (min-width: 1025px) {
+  .container {
+    width: 60%; /* Make the container more narrow for larger screens */
+  }
+
+  h2 {
+    font-size: 32px; /* Increase font size for larger screens */
+  }
+
+  /* Form styling */
+  form {
+    max-width: 600px; /* Increase the max width of the form */
+  }
+}
