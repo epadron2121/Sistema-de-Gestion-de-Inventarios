@@ -8,7 +8,7 @@ const port = 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://sistema-de-gestion-de-inventarios-4vgy.vercel.app/'
+  origin: 'https://sistema-de-gestion-de-inventarios-l76c.vercel.app/'
 }));
 app.use(bodyParser.json());
 
