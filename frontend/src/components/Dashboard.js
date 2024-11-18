@@ -24,7 +24,7 @@ const Dashboard = () => {
   // Fetch products when the component mounts
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://sistema-de-gestion-de-inventarios-l76c.vercel.app/api/products");
+      const response = await fetch("https://sistema-de-gestion-de-inventarios-4vgy.vercel.app/api/products");
       if (!response.ok) {
         throw new Error("Error al recuperar los productos");
       }

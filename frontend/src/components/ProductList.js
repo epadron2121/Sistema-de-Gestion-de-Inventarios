@@ -27,7 +27,7 @@ const ProductList = ({ products, onDeleteProduct, setProducts  }) => {
   const handleConfirmDelete = async () => {
     if (selectedProduct) {
       try {
-        const response = await fetch(`https://sistema-de-gestion-de-inventarios-l76c.vercel.app/api/products/${selectedProduct.id}`, {
+        const response = await fetch(`https://sistema-de-gestion-de-inventarios-4vgy.vercel.app/api/products/${selectedProduct.id}`, {
           method: "DELETE",
         });
   
@@ -60,7 +60,7 @@ const ProductList = ({ products, onDeleteProduct, setProducts  }) => {
   const handleSaveEdit = async () => {
     if (editProduct) {
       try {
-        const response = await fetch(`https://sistema-de-gestion-de-inventarios-l76c.vercel.app/api/products/${editProduct.id}`, {
+        const response = await fetch(`https://sistema-de-gestion-de-inventarios-4vgy.vercel.app/api/products/${editProduct.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

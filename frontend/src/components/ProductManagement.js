@@ -20,7 +20,7 @@ const ProductManagement = ({ onProductAdded }) => {
     }
 
     try {
-      const response = await fetch("https://sistema-de-gestion-de-inventarios-l76c.vercel.app/api/products", {
+      const response = await fetch("https://sistema-de-gestion-de-inventarios-4vgy.vercel.app/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
