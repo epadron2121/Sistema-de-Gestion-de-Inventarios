@@ -8,8 +8,9 @@ const port = 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://sistema-de-gestion-de-inventarios-l76c.vercel.app/'
+  origin: 'https://sistema-de-gestion-de-inventarios-l76c.vercel.app',  // Dominio del frontend
 }));
+
 app.use(bodyParser.json());
 
 // Ruta del archivo JSON donde se guardarán los productos
