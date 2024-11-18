@@ -6,7 +6,9 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import ProductManagement from "./ProductManagement";
 import ProductList from "./ProductList";
 
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -17,6 +19,7 @@ const Dashboard = () => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [stockFilter, setStockFilter] = useState("");
+  const { role } = useAuth(); // Obtenemos el rol desde el contexto
 
   // Fetch products when the component mounts
   const fetchProducts = async () => {
@@ -111,7 +114,7 @@ const Dashboard = () => {
         </Grid>
       </Grid>
 
-      {/* Filtros Interactivos */}
+      {/* Filtros interactivos */}
       <Box mt={4} p={3} sx={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
         <Typography variant="h5" align="center" gutterBottom>
           Filtros de Productos
@@ -168,17 +171,22 @@ const Dashboard = () => {
         <Typography variant="h5" align="center" gutterBottom>
           Lista de Productos
         </Typography>
-        <ProductList products={filteredProducts} onDelete={handleDeleteProduct} />
+        {/*}<ProductList products={filteredProducts} onDelete={handleDeleteProduct} />*/}
+        {/*<ProductList products={filteredProducts} onDeleteProduct={handleDeleteProduct} onUpdateProduct={fetchProducts} />*/}
+        {/* Pasamos los productos y la función setProducts a ProductList */}
+        <ProductList products={filteredProducts} setProducts={setProducts} onDeleteProduct={fetchProducts}/>
       </Box>
 
       {/* Administración de Productos */}
-      <Box mt={4} p={3} sx={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
-        <Typography variant="h5" align="center" gutterBottom>
-          Administrar Productos
-        </Typography>
-        <ProductManagement onProductAdded={fetchProducts} />
-      </Box>
-
+      {/* Solo muestra la sección de administración de productos si el rol es "admin" */}
+      {role === "admin" && (
+        <Box mt={4} p={3} sx={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
+          <Typography variant="h5" align="center" gutterBottom>
+            Administrar Productos
+          </Typography>
+          <ProductManagement onProductAdded={fetchProducts} />
+        </Box>
+      )}
       {/* Botón de Cerrar Sesión */}
       <Box mt={4} textAlign="center">
         <Button variant="contained" color="secondary" onClick={logout}>
@@ -188,5 +196,6 @@ const Dashboard = () => {
     </Container>
   );
 };
+
 
 export default Dashboard;

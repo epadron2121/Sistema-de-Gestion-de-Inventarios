@@ -21,7 +21,8 @@ app.post('/api/products', (req, res) => {
     quantity,
     category,  // Categoria agregada
     sales,
-    dateAdded: new Date().toISOString(),  // Fecha de creación del producto
+    dateAdded: new Date().toISOString().split('T')[0], // Solo toma la fecha
+
   };
   products.push(newProduct);
   res.status(201).json(newProduct);
@@ -31,28 +32,34 @@ app.post('/api/products', (req, res) => {
 app.get('/api/products', (req, res) => {
   const { category, dateAdded, stock } = req.query;
 
+  // Asegúrate de que `products` contiene los productos correctamente
   let filteredProducts = [...products];
 
   // Filtro por categoría
-  if (category) {
+  if (category && category !== '') {
     filteredProducts = filteredProducts.filter(product => product.category === category);
   }
 
-  // Filtro por fecha de adición (si se proporciona en formato YYYY-MM-DD)
-  if (dateAdded) {
-    filteredProducts = filteredProducts.filter(product => {
-      return product.dateAdded.startsWith(dateAdded); // Solo coincide con el año, mes y día
-    });
-  }
+  if (dateAdded && dateAdded !== '') {
+    const [start, end] = dateAdded.split(",");
+    if (start) {
+        filteredProducts = filteredProducts.filter(product => new Date(product.dateAdded) >= new Date(start));
+    }
+    if (end) {
+        filteredProducts = filteredProducts.filter(product => new Date(product.dateAdded) <= new Date(end));
+    }
+}
 
-  // Filtro por cantidad en stock (si se proporciona)
-  if (stock) {
+
+  // Filtro por cantidad en stock
+  if (stock && !isNaN(parseInt(stock, 10))) {
     const stockLimit = parseInt(stock, 10);
     filteredProducts = filteredProducts.filter(product => product.quantity >= stockLimit);
   }
 
   res.json(filteredProducts);
 });
+
 
 // Endpoint para eliminar un producto
 app.delete('/api/products/:id', (req, res) => {
@@ -69,7 +76,35 @@ app.delete('/api/products/:id', (req, res) => {
   res.status(200).json(deletedProduct[0]);
 });
 
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+app.put('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  const { name, price, quantity, category, sales } = req.body;
+
+  const productIndex = products.findIndex(product => product.id === parseInt(id));
+
+  if (productIndex === -1) {
+    return res.status(404).json({ error: "Producto no encontrado" });
+  }
+
+  const updatedProduct = {
+    ...products[productIndex],
+    name,
+    price,
+    quantity,
+    category,
+    sales,
+  };
+
+  products[productIndex] = updatedProduct;
+
+  console.log('Producto actualizado:', updatedProduct); // Verifica si el producto fue actualizado
+  res.json(updatedProduct);
+});
+
+
