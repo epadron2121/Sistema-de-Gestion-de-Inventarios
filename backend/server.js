@@ -5,7 +5,10 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+  origin: 'https://sistema-de-gestion-de-inventarios-l76c.vercel.app'
+}));
 app.use(bodyParser.json());
 
 // Simulación de una base de datos

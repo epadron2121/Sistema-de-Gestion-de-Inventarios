@@ -1,0 +1,9 @@
+{
+  "env": {
+    "production": {
+      "no-console": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "no-unused-vars": "off"
+    }
+  }
+}
