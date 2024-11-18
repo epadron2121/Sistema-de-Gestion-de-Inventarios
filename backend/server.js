@@ -82,7 +82,7 @@ app.delete('/api/products/:id', (req, res) => {
 
 // Iniciar el servidor
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at https://sistema-de-gestion-de-inventarios-l76c.vercel.app/${port}`);
 });
 
 app.put('/api/products/:id', (req, res) => {
